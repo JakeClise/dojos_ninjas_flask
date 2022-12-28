@@ -16,12 +16,13 @@
         
     
     <div class="container mt-5 text-primary text-center">
-        <form action="" method="post">
+        <form action="/create-ninja" method="post">
             <div class="mb-3">
                 <label for="dojo">Dojo:</label>
-                <select>
-                    <option selected>Choose one..</option>
-                    <option value="dojo">dojo</option>
+                <select name="dojo_id">
+                    {% for dojo in dojos %}
+                        <option value="{{dojo.id}}">{{ dojo.name }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="mb-3">
