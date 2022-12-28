@@ -21,3 +21,7 @@ class Dojo:
     def save(cls, data):
         query = "INSERT INTO dojos (name) VALUES (%(name)s);"
         return connectToMySQL('dojo_ninja_crud').query_db(query, data)
+
+        
+        
+    
