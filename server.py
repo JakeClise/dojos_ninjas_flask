@@ -20,6 +20,14 @@ def create_dojo():
     Dojo.save(data)
     return redirect('/dojos')
 
+@app.route('/one-dojo/<int:id>')
+def display_dojo(id):
+    data = {
+        "id":id
+    }
+    return render_template('view_dojo.html', dojo = Dojo.get_one_dojo(data))
+
+
 
 @app.route('/ninjas')
 def ninjas():
