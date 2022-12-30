@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request
 from flask_app.models.ninja import Ninja
+from flask_app.models.dojo import Dojo
 
 @app.route('/ninjas')
 def ninjas():
@@ -17,3 +18,24 @@ def save_ninja():
     }
     Ninja.save(data)
     return redirect('/dojos')
+
+@app.route('/delete/<int:id>')
+def delete_ninja(id):
+    data = {
+        "id":id
+    }
+    Ninja.delete(data)
+    return redirect('/dojos')
+
+@app.route('/go-edit/<int:id>')
+def go_edit_ninja(id):
+    data = {
+        "id":id
+    }
+    return render_template('edit_ninja.html', ninja = Ninja.get_one_ninja(data))
+
+@app.route('/edit-one-ninja', methods = ["POST"])
+def update_ninja():
+    Ninja.update(request.form)
+    return redirect('/dojos')
+

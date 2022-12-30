@@ -13,3 +13,19 @@ class Ninja:
     def save(cls,data):
         query = "INSERT INTO ninjas (first_name, last_name, age, dojo_id) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(dojo_id)s);"
         return connectToMySQL('dojo_ninja_crud').query_db(query, data)
+    
+    @classmethod
+    def delete(cls, data):
+        query = "DELETE FROM ninjas WHERE id = (%(id)s);"
+        return connectToMySQL('dojo_ninja_crud').query_db(query, data)
+    
+    @classmethod
+    def get_one_ninja(cls, data):
+        query = "SELECT * FROM ninjas WHERE id = %(id)s;"
+        result = connectToMySQL('dojo_ninja_crud').query_db(query, data)
+        return cls(result[0])
+
+    @classmethod
+    def update(cls, data):
+        query = "UPDATE ninjas SET first_name = %(first_name)s, last_name = %(last_name)s, age = %(age)s WHERE id = %(id)s;"
+        return connectToMySQL('dojo_ninja_crud').query_db(query, data)
